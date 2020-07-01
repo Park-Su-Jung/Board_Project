@@ -92,12 +92,8 @@ public class Board_Service{
 	{
 		String board_num = request.getParameter("board_num");
 		
-		Connect_Service conn = new Connect_Service();
-		
 		Map<String,Object> list = new Board_Model().Update_View(board_num);
 		request.setAttribute("list", list);
-		
-		conn.Lose_Connection();
 	}
 	
 	public void Update_Ok(HttpServletRequest request,HttpServletResponse response)

@@ -15,15 +15,12 @@ public class Update_Service{
 		String id = String.valueOf(s.getAttribute("USER_ID"));
 		String pass = request.getParameter("user_pass");
 		
-		Connect_Service conn = new Connect_Service();
 		if(new Login_Model().Id_Check(id, pass))
 		{
-			conn.Lose_Connection();
 			return true;
 		}
 		else
 		{
-			conn.Lose_Connection();
 			return false;
 		}
 	}
@@ -34,8 +31,6 @@ public class Update_Service{
 		String id = String.valueOf(s.getAttribute("USER_ID"));
 		String pass = request.getParameter("user_pass");
 		
-		Connect_Service conn = new Connect_Service();
 		new Update_Model().Update_data(id, pass);
-		conn.Lose_Connection();
 	}
 }

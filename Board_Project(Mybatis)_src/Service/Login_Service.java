@@ -13,17 +13,14 @@ public class Login_Service{
 		String id = request.getParameter("user_id");
 		String pass = request.getParameter("user_pass");
 		
-		Connect_Service conn = new Connect_Service();
 		if(new Login_Model().Id_Check(id, pass))
 		{
-			conn.Lose_Connection();
 			HttpSession s = request.getSession();
 			s.setAttribute("USER_ID", id);
 			return true;
 		}
 		else
 		{
-			conn.Lose_Connection();
 			return false;
 		}
 	}
