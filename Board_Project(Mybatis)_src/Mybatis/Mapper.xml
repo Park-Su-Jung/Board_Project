@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Mapper">
+  <select id="Check_ID" parameterType="map" resultType="map">
+  	SELECT user_id,user_pass FROM user WHERE user_id=#{user_id} AND user_pass=#{user_pass}
+  </select>
+  
+  <select id="Check_Create" parameterType="map" resultType="map">
+  	SELECT user_id,user_pass FROM user WHERE user_id=#{user_id}
+  </select>
+
+  <select id="Count_Board" resultType="int">
+    SELECT COUNT(*) FROM notice_board.board
+  </select>
+  
+  <select id="Choose_Board" parameterType="map" resultType="map">
+    SELECT * FROM notice_board.board ORDER BY board_num DESC LIMIT #{Start}, #{Count}
+  </select>
+  
+  <select id="Board_Pass" parameterType="map" resultType="string">
+  	SELECT board_pass FROM notice_board.board WHERE board_num=#{board_num}
+  </select>
+  
+  <select id="Board" parameterType="map" resultType="map">
+    SELECT * FROM notice_board.board WHERE board_num=#{board_num}
+  </select>
+  
+  <insert id="Create_ID" parameterType="map">
+  	INSERT INTO user(user_id,user_pass) VALUES(#{user_id},#{user_pass})
+  </insert>
+  
+  <insert id="Write_Board" parameterType="map">
+  	INSERT INTO board(user_id,board_pass,board_name,board_data,board_writer) VALUES(#{user_id},#{board_pass},#{board_name},#{board_data},#{board_writer})
+  </insert>
+  
+  <delete id="Delete_Board" parameterType="map">
+  	DELETE FROM board WHERE board_num = #{board_num}
+  </delete>
+  
+  <delete id="Delete_User" parameterType="map">
+  	DELETE FROM user WHERE user_id = #{user_id}
+  </delete>
+  
+  <update id="Update_Board" parameterType="map">
+  	UPDATE board SET user_id=#{user_id},board_pass=#{board_pass},board_name=#{board_name},board_data=#{board_data},board_writer=#{board_writer},update_data=NOW() WHERE board_num=#{board_num}
+  </update>
+  
+  <update id="Update_ID" parameterType="map">
+  	UPDATE user SET user_pass = #{user_pass}, update_date=NOW() WHERE user_id= #{user_id}
+  </update>
+</mapper>
